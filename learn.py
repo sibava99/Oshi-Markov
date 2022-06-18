@@ -41,7 +41,7 @@ text_model = markov.build_model(parsed_text, format=format, state_size=2)
 logger.info('Built text model.')
 
 json = text_model.to_json()
-open('data/' + filename + '.json', 'w').write(json)
+open('data/' + filename + '.json', 'w', encoding='utf-8').write(json)
 
 # Load from JSON
 # json = open('input.json').read()

@@ -29,7 +29,7 @@ def format_text(t):
     return t
 
 def parse_text(filepath):
-    file = open(filepath, 'r').read()
+    file = open(filepath, 'r', encoding='utf-8').read()
 
     parsed_text = ''
     for line in file.split("\n"):

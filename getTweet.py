@@ -23,21 +23,12 @@ args = sys.argv
 
 #サーバとローカルどちらでも動作する形
 #テキストと最長出力長と最小出力長を入力して、モデルを保存し、保存したディレクトリを返す
-<<<<<<< HEAD
-def study_from_markov(text):
-    n = 1
-    text = markov.parse_text(text)
-    #format = format
-    max_chars = 75
-    min_chars = 10
-=======
 def study_from_markov(text, max_chars, min_chars):
     n = 1
     text = markov.parse_text(text)
     #format = format
     max_chars = max_chars
     min_chars = min_chars
->>>>>>> 2a7d08cdf5c87fb89e36596c033311509106bd87
     #logger.info('Parsed text.')
     #text_model = markov.build_model(text, format=format, state_size=2)
     text_model = markov.build_model(text, state_size=2)
@@ -75,25 +66,3 @@ try:
 except IndexError:
     print('ERROR: filename is required. (e.g. "sample")')
     sys.exit()
-<<<<<<< HEAD
-
-
-"""
-1. Load text -> Parse text using MeCab
-"""
-#parsed_text = markov.parse_text('data/' + filename + '.txt')
-
-"""
-2. Build model
-"""
-
-# Load from JSON
-# json = open('input.json').read()
-# text_model = markovify.Text.from_json(json)
-
-
-"""
-3. Make sentences
-"""
-=======
->>>>>>> 2a7d08cdf5c87fb89e36596c033311509106bd87

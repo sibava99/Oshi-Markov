@@ -4,7 +4,7 @@ import MeCab
 import re
 
 # Load file
-text_file = open("../data/cleaned_comment.txt", "r")
+text_file = open("data/output.txt", "r",encoding='utf-8')
 text = text_file.read()
 
 # Parse text using MeCab

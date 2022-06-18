@@ -33,11 +33,11 @@ def getTweet(Account):
 Account = input()
 tweets = getTweet(Account)
 
-with open('dataset.txt',mode='w', encoding='utf-8') as f:
+with open('data/dataset.txt',mode='w', encoding='utf-8') as f:
     for tweet in tweets:
     	f.write(tweet)
 
-with open ('dataset.txt',mode='r', encoding='utf-8') as f:
+with open ('data/dataset.txt',mode='r', encoding='utf-8') as f:
 	text = f.read()
 	text = re.sub('http.*','', text)
 	text = re.sub('　','', text)
@@ -46,5 +46,5 @@ with open ('dataset.txt',mode='r', encoding='utf-8') as f:
 	text = re.sub('RT.*','',text)
 	text = re.sub('@.*','',text)
 
-with open('output.txt',mode='w', encoding='utf-8') as f:
+with open('data/output.txt',mode='w', encoding='utf-8') as f:
     f.write(text)

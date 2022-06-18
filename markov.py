@@ -16,6 +16,10 @@ def disable_test_sentence_input():
     markovify.Text.test_sentence_input = do_nothing
 def enable_test_sentence_input():
     markovify.Text.test_sentence_input = test_sentence_input
+    
+def json_to_model(json):
+    text_model = markovify.Text.from_json(json)
+    return text_model
 
 def format_text(t):
     t = t.replace('　', ' ')  # Full width spaces
@@ -28,11 +32,9 @@ def format_text(t):
     t = re.sub(r'\n +', '\n', t)  # Spaces
     return t
 
-def parse_text(filepath):
-    file = open(filepath, 'r', encoding='utf-8').read()
-
+def parse_text(text):
     parsed_text = ''
-    for line in file.split("\n"):
+    for line in text.split("\n"):
         parsed_text = parsed_text + MeCab.Tagger('-Owakati').parse(line)
     return parsed_text
 
@@ -42,7 +44,7 @@ def build_model(text, format=True, state_size=2):
     format=False: Slow. Funnier(?)
     """
     if format is True:
-        logger.info('Format: True')
+        #logger.info('Format: True')
         return markovify.NewlineText(format_text(text), state_size)
     else:
         logger.info('Format: False')
@@ -51,14 +53,14 @@ def build_model(text, format=True, state_size=2):
         enable_test_sentence_input()
         return text
 
-def make_sentences(text, start=None, max=300, min=1, tries=100):
+def make_sentences(model, start=None, max=300, min=1, tries=100):
     if start is (None or ''):   # If start is not specified
         for _ in range(tries):
-            sentence = str(text.make_sentence()).replace(' ', '')
+            sentence = str(model.make_sentence()).replace(' ', '')
             if sentence and len(sentence) <= max and len(sentence) >= min:
                 return sentence
     else:  # If start is specified
         for _ in range(tries):
-            sentence = str(text.make_sentence_with_start(beginning=start)).replace(' ', '')
+            sentence = str(model.make_sentence_with_start(beginning=start)).replace(' ', '')
             if sentence and len(sentence) <= max and len(sentence) >= min:
                 return sentence

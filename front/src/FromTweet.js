@@ -35,7 +35,7 @@ export default function FromTweet(){
   function GetId(){
     return(
         <form>
-            <TextField id="outlined-basic" label="@hogehoge" variant="outlined"/>
+            <TextField id="outlined-basic" label="@username" variant="outlined" margin='none'/> <Button color="inherit" >生成</Button>
         </form>
     );
   }

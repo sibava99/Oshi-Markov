@@ -28,9 +28,7 @@ def split(text):
             splitted_text += '\n'
     return splitted_text
 
-def textGen(file):
-    f = open(file, 'r', encoding="utf-8")
-    text = f.read()
+def textGen(text):
     sentence = None
     while sentence == None: # 素材によっては空の文章が生成されることがあるので、その対策
         # テキストを処理できる形に分割
@@ -58,4 +56,6 @@ def textGen(file):
     return ''.join(sentence.split())
 
 if __name__ == '__main__':
-    textGen("data/cleaned_comment.txt")
+    with open("data/cleaned_comment.txt", "r") as f:
+        text = f.read()
+    textGen(text)

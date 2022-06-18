@@ -40,8 +40,10 @@ def textGen(file):
         text_model = markovify.NewlineText(splitted_text, state_size=3)
 
         # モデルを基にして文章を生成
-        sentence = text_model.make_sentence()   
-        print(sentence)
+        for _ in range(10):
+            sentence = text_model.make_sentence()   
+            if sentence == None: continue
+            print(sentence.replace(" ", ""))
     # 学習データの保存
     with open('learned_data.json', 'w', encoding="utf-8") as f:
         f.write(text_model.to_json())

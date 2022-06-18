@@ -58,7 +58,7 @@ if __name__ == '__main__':
     try:
         filename = args[1]
         filepath = 'data/' + filename + '.txt'
-        text = open(filepath, 'r').read()
+        text = open(filepath, 'r', encoding="utf-8").read()
         #format = bool(strtobool(args[2])) if args[2:3] else True
 
         #parsed_text = generate_sentence(text, format, max_chars, min_chars)

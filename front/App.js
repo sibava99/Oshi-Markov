@@ -3,6 +3,8 @@ import './App.css';
 import Header from './Header.js'
 import Home from './Home.js'
 import FromTweet from './FromTweet.js'
+import FromCopus from './FromCopus.js'
+import Rules from './Rules.js'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 class App extends React.Component {

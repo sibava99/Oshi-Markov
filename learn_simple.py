@@ -47,22 +47,23 @@ def study_from_markov(text, max_chars, min_chars):
 #print('Usage: python learn.py <filename> [max_chars] [min_chars]')
 
 # .envファイルの内容を読み込見込む
-load_dotenv()
-max_chars = int(args[2]) if args[2:3] else 70
-min_chars = int(args[3]) if args[3:4] else 25
+if __name__ == '__main__':
+    load_dotenv()
+    max_chars = int(args[2]) if args[2:3] else 70
+    min_chars = int(args[3]) if args[3:4] else 25
 
-if args[1] == '^@*.':
-    tweets = getTweet(Account)
-    
-try:
-    filename = args[1]
-    filepath = 'data/' + filename + '.txt'
-    text = open(filepath, 'r').read()
-    #format = bool(strtobool(args[2])) if args[2:3] else True
+    if args[1] == '^@*.':
+        tweets = getTweet(Account)
+        
+    try:
+        filename = args[1]
+        filepath = 'data/' + filename + '.txt'
+        text = open(filepath, 'r').read()
+        #format = bool(strtobool(args[2])) if args[2:3] else True
 
-    #parsed_text = generate_sentence(text, format, max_chars, min_chars)
-    print(study_from_markov(text, max_chars, min_chars))
-    #text = generate_from_markov(path)
-except IndexError:
-    print('ERROR: filename is required. (e.g. "sample")')
-    sys.exit()
+        #parsed_text = generate_sentence(text, format, max_chars, min_chars)
+        print(study_from_markov(text, max_chars, min_chars))
+        #text = generate_from_markov(path)
+    except IndexError:
+        print('ERROR: filename is required. (e.g. "sample")')
+        sys.exit()

@@ -48,7 +48,7 @@ def generate_text_test():
         おバイオはあと、３分の１割を切っておりますわ
         こう見ると大阪ってすっごい小さいですわね。あの小さい街にあれだけ物が建っていれば、そーーーりゃ忙しいですわ大阪は
     """
-    return textGen(text)
+    return study_from_markov(text, 75, 10)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -38,13 +38,13 @@ with open('dataset.txt',mode='w', encoding='utf-8') as f:
         f.write(tweet)
 
 with open ('dataset.txt',mode='r', encoding='utf-8') as f:
-	text = f.read()
-	text = re.sub('http.*','', text)
-	text = re.sub('　','', text)
-	text = re.sub(r'\(.*?\)','',text)
-	text = re.sub(r'\*\d*','',text)
-	text = re.sub('RT.*','',text)
-	text = re.sub('@.*','',text)
+    text = f.read()
+    text = re.sub('http.*','', text)
+    text = re.sub('　','', text)
+    text = re.sub(r'\(.*?\)','',text)
+    text = re.sub(r'\*\d*','',text)
+    text = re.sub('RT.*','',text)
+    text = re.sub('@.*','',text)
 
 with open('output.txt',mode='w', encoding='utf-8') as f:
     f.write(text)

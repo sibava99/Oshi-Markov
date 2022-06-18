@@ -3,6 +3,7 @@ import markovify
 import MeCab
 import re
 
+#あああああああああああああああああああ
 logger = logging.getLogger(__name__)
 fmt = "%(asctime)s %(levelname)s %(name)s :%(message)s"
 logging.basicConfig(level=logging.DEBUG, format=fmt)

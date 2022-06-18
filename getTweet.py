@@ -1,7 +1,4 @@
-"""
-python learn.py <filename> [format] [max_chars] [min_chars]
-filename: Do not include .txt or .json etc.
-"""
+# coding: UTF-8
 from random import sample
 from unittest import result
 import tweepy
@@ -10,59 +7,44 @@ import unidic
 import re
 import os
 from dotenv import load_dotenv
-import markov
-import logging
-import sys
-from distutils.util import strtobool
-
-logger = logging.getLogger(__name__)
-fmt = "%(asctime)s %(levelname)s %(name)s :%(message)s"
-logging.basicConfig(level=logging.DEBUG, format=fmt)
-
-args = sys.argv
-
-#サーバとローカルどちらでも動作する形
-#テキストと最長出力長と最小出力長を入力して、モデルを保存し、保存したディレクトリを返す
-def study_from_markov(text, max_chars, min_chars):
-    n = 1
-    text = markov.parse_text(text)
-    #format = format
-    max_chars = max_chars
-    min_chars = min_chars
-    #logger.info('Parsed text.')
-    #text_model = markov.build_model(text, format=format, state_size=2)
-    text_model = markov.build_model(text, state_size=2)
-    try:
-        for _ in range(n):
-            sentence = markov.make_sentences(text_model, start='', max=max_chars, min=min_chars)
-            #logger.info(sentence)
-    except KeyError:
-        #logger.error('KeyError: No sentence starts with "start".')
-        #logger.info('If you set format=True, please change "start" to another word.')
-        #logger.info('If you set format=False, you cannot specify "start".')
-        pass
-    return sentence
-
-#print('Usage: python learn.py <filename> [format] [max_chars] [min_chars]')
-#print('Usage: python learn.py <filename> [max_chars] [min_chars]')
 
 # .envファイルの内容を読み込見込む
 load_dotenv()
-max_chars = int(args[2]) if args[2:3] else 70
-min_chars = int(args[3]) if args[3:4] else 25
 
-if args[1] == '^@*.':
-    tweets = getTweet(Account)
-    
-try:
-    filename = args[1]
-    filepath = 'data/' + filename + '.txt'
-    text = open(filepath, 'r').read()
-    #format = bool(strtobool(args[2])) if args[2:3] else True
 
-    #parsed_text = generate_sentence(text, format, max_chars, min_chars)
-    print(study_from_markov(text, max_chars, min_chars))
-    #text = generate_from_markov(path)
-except IndexError:
-    print('ERROR: filename is required. (e.g. "sample")')
-    sys.exit()
+
+def getTweet(Account):
+    consumer_key = os.environ["consumer_key"]
+    consumer_secret = os.environ["consumer_secret"]
+    access_token = os.environ["access_token"]
+    access_token_secret = os.environ["access_token_secret"]
+
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    api = tweepy.API(auth)
+
+    result = api.user_timeline(screen_name = Account, count = 3000)
+    tweets = []
+    for i in result:
+        tweet = i.text
+        tweets.append(tweet)
+    return tweets
+
+Account = input()
+tweets = getTweet(Account)
+
+with open('dataset.txt',mode='w', encoding='utf-8') as f:
+    for tweet in tweets:
+        f.write(tweet)
+
+with open ('dataset.txt',mode='r', encoding='utf-8') as f:
+	text = f.read()
+	text = re.sub('http.*','', text)
+	text = re.sub('　','', text)
+	text = re.sub(r'\(.*?\)','',text)
+	text = re.sub(r'\*\d*','',text)
+	text = re.sub('RT.*','',text)
+	text = re.sub('@.*','',text)
+
+with open('output.txt',mode='w', encoding='utf-8') as f:
+    f.write(text)

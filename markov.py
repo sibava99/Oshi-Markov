@@ -3,7 +3,6 @@ import markovify
 import MeCab
 import re
 
-#あああああああああああああああああああ
 logger = logging.getLogger(__name__)
 fmt = "%(asctime)s %(levelname)s %(name)s :%(message)s"
 logging.basicConfig(level=logging.DEBUG, format=fmt)
@@ -16,10 +15,6 @@ def disable_test_sentence_input():
     markovify.Text.test_sentence_input = do_nothing
 def enable_test_sentence_input():
     markovify.Text.test_sentence_input = test_sentence_input
-    
-def json_to_model(json):
-    text_model = markovify.Text.from_json(json)
-    return text_model
 
 def format_text(t):
     t = t.replace('　', ' ')  # Full width spaces
@@ -44,7 +39,7 @@ def build_model(text, format=True, state_size=2):
     format=False: Slow. Funnier(?)
     """
     if format is True:
-        #logger.info('Format: True')
+        logger.info('Format: True')
         return markovify.NewlineText(format_text(text), state_size)
     else:
         logger.info('Format: False')
@@ -53,14 +48,14 @@ def build_model(text, format=True, state_size=2):
         enable_test_sentence_input()
         return text
 
-def make_sentences(model, start=None, max=300, min=1, tries=100):
+def make_sentences(text, start=None, max=300, min=1, tries=100):
     if start is (None or ''):   # If start is not specified
         for _ in range(tries):
-            sentence = str(model.make_sentence()).replace(' ', '')
+            sentence = str(text.make_sentence()).replace(' ', '')
             if sentence and len(sentence) <= max and len(sentence) >= min:
                 return sentence
     else:  # If start is specified
         for _ in range(tries):
-            sentence = str(model.make_sentence_with_start(beginning=start)).replace(' ', '')
+            sentence = str(text.make_sentence_with_start(beginning=start)).replace(' ', '')
             if sentence and len(sentence) <= max and len(sentence) >= min:
                 return sentence

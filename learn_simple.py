@@ -23,12 +23,12 @@ args = sys.argv
 
 #サーバとローカルどちらでも動作する形
 #テキストと最長出力長と最小出力長を入力して、モデルを保存し、保存したディレクトリを返す
-def study_from_markov(text, max_chars, min_chars):
+def study_from_markov(text):
     n = 1
     text = markov.parse_text(text)
     #format = format
-    max_chars = max_chars
-    min_chars = min_chars
+    max_chars = 75
+    min_chars = 10
     #logger.info('Parsed text.')
     #text_model = markov.build_model(text, format=format, state_size=2)
     text_model = markov.build_model(text, state_size=2)

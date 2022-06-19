@@ -27,6 +27,7 @@ export default function App(props){
               <Route path="fromCopus" element = {<FromCopus />} />
               <Route path="rules" element = {<Rules />} />
               <Route path="/:model_id" element = {<Home />} />
+              <Route path="/" element = {<Home />} />
               <Route element = {<NotFound />} />
             </Routes>
           </Container>

@@ -22,12 +22,12 @@ def getTweet(Account):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
-
-    result = api.user_timeline(screen_name = Account, count = 3000)
+    pages = [1,2,3,4,5,6,7,8,9,10,11]
     tweets = []
-    for i in result:
-        tweet = i.text
-        tweets.append(tweet)
+    for page in pages:
+        results = api.user_timeline(screen_name=Account, count=200, page=page)
+        for r in results:
+            tweets.append(r.text)
     return tweets
 
 Account = input()

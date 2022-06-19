@@ -9,35 +9,33 @@ import Box from '@mui/material/Box';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Container from '@mui/material/Container';
 
-class App extends React.Component {
-  constructor(props,context){
-    super(props,context)
-    
-  }
-  render(){
-    return (
-      <BrowserRouter>
+import {
+  useParams,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
+
+export default function App(props){
+  return(
+    <BrowserRouter>
       <Box sx={{ bgcolor: '#f0e9f6'}}>
         <div>
-        <Header/>
-        <Container>
+          <Header/>
+          <Container>
             <Routes>
-            <Route exaxt path="/" element = {<Home />} />
-            <Route path="fromTweet" element = {<FromTweet />} />
-            <Route path="fromCopus" element = {<FromCopus />} />
-            <Route path="rules" element = {<Rules />} />
-            <Route element = {<NotFound />} />
+              <Route path="fromTweet" element = {<FromTweet />} />
+              <Route path="fromCopus" element = {<FromCopus />} />
+              <Route path="rules" element = {<Rules />} />
+              <Route path="/:model_id" element = {<Home />} />
+              <Route element = {<NotFound />} />
             </Routes>
-            </Container>
+          </Container>
         </div>
-        </Box>
-        </BrowserRouter>
-    );
-  }
+      </Box>
+    </BrowserRouter>
+  )
 }
 
 function NotFound(){
   return <h2>NOT FOUND PAGE</h2>;
 }
-
-export default App;

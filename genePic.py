@@ -21,14 +21,16 @@ def img_add_msg(img, message):
     img = np.array(img)                                 # PIL型の画像をcv2(NumPy)型に変換
     return img                                          # 文字入りの画像をリターン
 
-img = cv2.imread('pic\lome.jpg', 1)                         # カラー画像読み込み
+def embed_sentence_to_image(image_path, sentence):
+    img = cv2.imread(image_path, 1)                         # カラー画像読み込み
+    img = img_add_msg(img, sentence)                         # 画像に文字を入れる関数を実行
 
-message = 'Hello World (ハローワールド)'                # 画像に入れる文章
-img = img_add_msg(img, message)                         # 画像に文字を入れる関数を実行
+    # 画像を表示させる（何かキーを入力すると終了）
+    #cv2.imshow('title', img)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
 
-# 画像を表示させる（何かキーを入力すると終了）
-#cv2.imshow('title', img)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
-
-cv2.imwrite('pic\output.jpg', img)
+    cv2.imwrite('pic\output.jpg', img)
+    
+if __name__ == "__main__":
+    embed_sentence_to_image('pic\lome.jpg', "Hello, world")

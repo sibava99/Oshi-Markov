@@ -14,6 +14,13 @@ import { Grid } from '@material-ui/core';
 import Container from '@mui/material/Container';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
+import {
+  useParams,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,8 +33,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
-    const classes = useStyles();
+export default function Home(props){
+  const location = useLocation();
+  const params = useParams(); 
+  console.log(location, params)
+
     return(
         <div>
         <Box sx = {{height:100}}></Box>

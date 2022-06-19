@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import { Container, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,5 +24,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FromCopus(){
-    return <h2>コーパスから生成</h2>;
+    return(
+      <div>
+      <Box sx = {{height:100}}></Box>
+      <Box sx={{ bgcolor: '#ffffff', width: 900,  borderRadius: '16px'}}>
+      <Container maxWidth="sm" >
+      <Box sx = {{height:50}}></Box>
+    <h2>コーパスから生成</h2>
+    <Box sx = {{height:100}}></Box>
+    </Container>
+    </Box>
+    <Box sx = {{height:100}}></Box>
+    </div>
+    );
+  }
+
+  function getCorpus(){
+    return(
+      <div>
+        
+      </div>
+    );
   }

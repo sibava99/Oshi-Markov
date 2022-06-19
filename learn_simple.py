@@ -2,6 +2,8 @@
 python learn.py <filename> [format] [max_chars] [min_chars]
 filename: Do not include .txt or .json etc.
 """
+from cmath import e
+import encodings
 from random import sample
 from unittest import result
 import tweepy
@@ -14,6 +16,9 @@ import markov
 import logging
 import sys
 from distutils.util import strtobool
+import json
+from pprint import pprint
+import markovify
 
 
 #サーバとローカルどちらでも動作する形
@@ -27,9 +32,17 @@ def study_from_markov(text):
     #logger.info('Parsed text.')
     #text_model = markov.build_model(text, format=format, state_size=2)
     text_model = markov.build_model(text, state_size=2)
+    #pprint()
+    with open("temp.save", "w") as f:
+        json.dump(text_model.to_dict(), f)
+    with open('temp.save') as f:
+        params = f.read()
+        text_model_a = markovify.NewlineText.from_json(params)
+    #with open("temp.txt", "w", encoding='utf-8') as f:
+    #    json.dump(text_model.to_json, f)
     try:
         for _ in range(n):
-            sentence = markov.make_sentences(text_model, start='', max=max_chars, min=min_chars)
+            sentence = markov.make_sentences(text_model_a, start='', max=max_chars, min=min_chars)
             #logger.info(sentence)
     except KeyError:
         #logger.error('KeyError: No sentence starts with "start".')

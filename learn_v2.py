@@ -47,7 +47,7 @@ def getTweet(Account):
     text = re.sub(r'\*\d*','',text)
     text = re.sub('RT.*','',text)
     text = re.sub('@.*','',text)
-    print(text)
+    # print(text)
     text = markov.parse_text(text)
     text_model = markov.build_model(text, state_size=2)
     json = text_model.to_json()
@@ -55,12 +55,12 @@ def getTweet(Account):
     return json
     
 #モデルが保存されてるjsonファイルを渡し、最短長以上最長長以下の文章を生成する
-def generate_from_markov(path, max_chars, min_chars):
+def generate_from_markov(json, max_chars, min_chars):
     text_model = markovify.Text.from_json(json)
     try:
         for _ in range(10):
             sentence = markov.make_sentences(text_model, start='', max=max_chars, min=min_chars)
-            logger.info(sentence)
+            # logger.info(sentence)
     except KeyError:
         pass
     return sentence

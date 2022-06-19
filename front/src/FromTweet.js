@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import mob from "./pic/mob.jpg"
 import TextField from '@mui/material/TextField';
 import { Container, Grid } from '@material-ui/core';
+import Input from '@mui/material/Input';
 import {
   TwitterIcon,
   TwitterShareButton,
@@ -21,6 +22,8 @@ import {
   useHistory,
   useLocation,
 } from 'react-router-dom';
+
+var params = null;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,10 +39,11 @@ const useStyles = makeStyles((theme) => ({
 
 function OnClickGenerate(setstate){
   var data = {
-    twitter_id: "@1000000lome"
+    twitter_id: "@1000000lome",
+    screen: setstate.screen
   };
   var params = new URLSearchParams();
-  params.append("twitter_id", "@1000000lome");
+  params.append("twitter_id", "screen");
   axios.post('https://markov-backend.herokuapp.com/generate_text_twitter/', params)
     .then((results)=>{
         if (results.data === "Error"){
@@ -56,15 +60,19 @@ function OnClickGenerate(setstate){
     });
 }
 
-export default function FromTweet(){
+export default function FromTweet(props){
+  params = useParams(); 
+  const [sentence, setSentence, screen, setScreen] = useState("");
+  console.log(params)
     return(
         <div>
+          
            <Box sx = {{height:100 }}></Box>
            <Box sx={{ bgcolor: '#ffffff', width: 900,  borderRadius: '16px'}}>
            <Container maxWidth="sm" >
            <Box sx = {{height:50 }}></Box>
             <h2>Tweetから生成</h2>
-            <GetId />
+            <GetId sentence={sentence} onClick={() => OnClickGenerate(setScreen)}/>
             <Box sx = {{height:150 }}></Box>
             </Container >
             </Box>
@@ -90,20 +98,22 @@ export default function FromTweet(){
     )
   }
   
-  function GetId(){
-    var [sentence, setSentence] = useState("");
+  function GetId(props){
+    var [sentence, setSentence, screen, setSceen] = useState("");
     return(
       <Grid container alignItems="center" justify="center">
-        <form onSubmit={OnClickGenerate(setSentence)}>
+        <form onSubmit={props.onClick}>
             <Box sx = {{width:"100%", display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',}}>
-            <TextField id="outlined-basic" label="@username" variant="outlined" margin='none'/>
+            <input value={screen} />
             <Box sx = {{width:20 }}></Box>
-            <Button Button variant="contained" color="secondary" size = "large" onClick={OnClickGenerate(setSentence)}>生成</Button>
+            <Button Button variant="contained" color="secondary" size = "large" onClick={props.onClick}>生成</Button>
             </Box>
         </form>
         <Box sx = {{height:150 }}></Box>
+        {props.screen}
+        {props.sentence}
         <img src= {mob} alt="picture" width = "700"/>
       </Grid>
     );

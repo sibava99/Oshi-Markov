@@ -10,7 +10,11 @@ import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 import mob from "./pic/mob.jpg"
 import TextField from '@mui/material/TextField';
-import { Grid } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
+import {
+  TwitterIcon,
+  TwitterShareButton,
+} from "react-share"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +31,34 @@ const useStyles = makeStyles((theme) => ({
 export default function FromTweet(){
     return(
         <div>
+           <Box sx = {{height:100 }}></Box>
+           <Box sx={{ bgcolor: '#ffffff', width: 900,  borderRadius: '16px'}}>
+           <Container maxWidth="sm" >
+           <Box sx = {{height:50 }}></Box>
             <h2>Tweetから生成</h2>
             <GetId />
             <Box sx = {{height:150 }}></Box>
+            </Container >
+            </Box>
+            <Box sx = {{height:50 }}></Box>
+            <Box sx={{ bgcolor: '#ffffff', width: 900,  borderRadius: '16px'}}>
+            <Container maxWidth="sm">
+              
+            <Box sx = {{height:50 }}></Box>
             <h2>シェアする</h2>
+            <Box sx = {{height:50 }}></Box>
+
+            <TwitterShareButton
+              url={"https://twitter.com"}
+              title={"wawawa"}
+              hashtags={"推しジェネ"}
+            >
+              <TwitterIcon size={50} round />
+            </TwitterShareButton>
+            <Box sx = {{height:100 }}></Box>
+            </Container >
+            </Box>
+            <Box sx = {{height:100 }}></Box>
         </div>
     )
   }
@@ -38,11 +66,15 @@ export default function FromTweet(){
   function GetId(){
     return(
       <Grid container alignItems="center" justify="center">
-        <Grid item xs={8}>
         <form>
-            <TextField id="outlined-basic" label="@username" variant="outlined" margin='none'/> <Button Button variant="contained" color="secondary" size = "large" >生成</Button>
+            <Box sx = {{width:"100%", display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',}}>
+            <TextField id="outlined-basic" label="@username" variant="outlined" margin='none'/>
+            <Box sx = {{width:20 }}></Box>
+            <Button Button variant="contained" color="secondary" size = "large" >生成</Button>
+            </Box>
         </form>
-        </Grid>
         <Box sx = {{height:150 }}></Box>
         <img src= {mob} alt="picture" width = "700"/>
       </Grid>

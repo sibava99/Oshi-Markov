@@ -1,8 +1,8 @@
 import requests
 import json
 
-#BASE_URL = "http://localhost:5000/"
-BASE_URL = "https://markov-backend.herokuapp.com/"
+BASE_URL = "http://localhost:5000/"
+# BASE_URL = "https://markov-backend.herokuapp.com/"
 
 def generate_test():
     with open("data/output.txt", "r", encoding="utf-8") as f:

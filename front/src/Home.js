@@ -13,6 +13,7 @@ import lome from "./pic/lome.jpg"
 import { Grid } from '@material-ui/core';
 import Container from '@mui/material/Container';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import axios from 'axios'
 
 import {
   useParams,
@@ -20,6 +21,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
+var params = null;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,10 +35,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function OnClickGenerate(){
+  var data = {
+    twitter_id: "@1000000lome"
+  };
+  var params = new URLSearchParams();
+  params.append("twitter_id", "@1000000lome");
+  axios.post('http://127.0.0.1:5000/generate_text_twitter/', params)
+    .then((results)=>{
+        if (results.data === "Error"){
+          console.log(results.data)
+        }else{
+          console.log(results.data)
+        }                     
+    })
+    .catch(function (thrown) {
+      console.log("unkonown error")// handle error
+    });
+}
+
+
 export default function Home(props){
   const location = useLocation();
-  const params = useParams(); 
-  console.log(location, params)
+  params = useParams(); 
+  console.log(params)
 
     return(
         <div>
@@ -59,7 +81,7 @@ function Salome(){
         <div align = "center">
             <img src= {lome} alt="picture" width = "700"/>
             <Box sx = {{height:50}}></Box>
-            <Button variant="contained" color="secondary" size = "large" >生成</Button>
+            <Button variant="contained" color="secondary" size = "large" onClick={OnClickGenerate}>生成</Button>
             <Box sx = {{height:50}}></Box>
         </div>
     );

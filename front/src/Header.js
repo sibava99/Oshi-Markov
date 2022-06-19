@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Box from '@mui/material/Box';
+import logo from "./pic/logo.png"
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,11 +28,9 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+        <Box sx = {{width:30}}></Box>
           <Typography variant="h6" className={classes.title}>
-            <Box textAlign="left" component={Link} to = "/">推しジェネレーター</Box>
+          <a href="/"> <img src= {logo} alt="picture" width = "350"/></a>
           </Typography>
           <Button color="inherit" component={Link} to = "/fromTweet">Tweetから生成</Button>
           <Button color="inherit" component={Link} to = "/fromCopus">コーパスから生成</Button>

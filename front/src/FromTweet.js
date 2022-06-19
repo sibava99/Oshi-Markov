@@ -8,7 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
+import mob from "./pic/mob.jpg"
 import TextField from '@mui/material/TextField';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +29,7 @@ export default function FromTweet(){
         <div>
             <h2>Tweetから生成</h2>
             <GetId />
+            <Box sx = {{height:150 }}></Box>
             <h2>シェアする</h2>
         </div>
     )
@@ -34,8 +37,14 @@ export default function FromTweet(){
   
   function GetId(){
     return(
+      <Grid container alignItems="center" justify="center">
+        <Grid item xs={8}>
         <form>
-            <TextField id="outlined-basic" label="@username" variant="outlined" margin='none'/> <Button color="inherit" >生成</Button>
+            <TextField id="outlined-basic" label="@username" variant="outlined" margin='none'/> <Button Button variant="contained" color="secondary" size = "large" >生成</Button>
         </form>
+        </Grid>
+        <Box sx = {{height:150 }}></Box>
+        <img src= {mob} alt="picture" width = "700"/>
+      </Grid>
     );
   }

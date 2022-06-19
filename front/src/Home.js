@@ -60,13 +60,14 @@ function OnClickGenerate(setstate){
 
 export default function Home(props){
   params = useParams(); 
+  const [sentence, setSentence] = useState("");
   console.log(params)
     return(
         <div>
         <Box sx = {{height:100}}></Box>
         <Box sx={{ bgcolor: '#ffffff', width: 900,  borderRadius: '16px'}}>
         <Box sx = {{height:100}}></Box>
-        <Salome />
+        <Salome sentence={sentence} onClick={() => OnClickGenerate(setSentence)}/>
         </Box>
         <Box sx = {{height:50}}></Box>
         <Box sx={{ bgcolor: '#ffffff', width: 900,  borderRadius: '16px'}}>
@@ -77,15 +78,15 @@ export default function Home(props){
     );
 }
 
-function Salome(){
-  var [sentence, setSentence] = useState("");
+function Salome(props){
     return(
-        <div align = "center">
-            <img src= {lome} alt="picture" width = "700"/>
-            <Box sx = {{height:50}}></Box>
-            <Button variant="contained" color="secondary" size = "large" onClick={OnClickGenerate(setSentence)}>生成</Button>
-            <Box sx = {{height:50}}></Box>
-        </div>
+      <div align = "center">
+        <img src= {lome} alt="picture" width = "700"/>
+        <Box sx = {{height:50}}></Box>
+        <Button variant="contained" color="secondary" size = "large" onClick={props.onClick}>生成</Button>
+        <Box sx = {{height:50}}></Box>
+        {props.sentence}
+      </div>
     );
 }
 

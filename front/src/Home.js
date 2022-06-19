@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -35,18 +35,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OnClickGenerate(){
+function OnClickGenerate(setstate){
   var data = {
     twitter_id: "@1000000lome"
   };
   var params = new URLSearchParams();
   params.append("twitter_id", "@1000000lome");
-  axios.post('http://127.0.0.1:5000/generate_text_twitter/', params)
+  axios.post('https://markov-backend.herokuapp.com/generate_text_twitter/', params)
     .then((results)=>{
         if (results.data === "Error"){
           console.log(results.data)
         }else{
           console.log(results.data)
+          setstate(results.data["sentence"])
+          // テキストでresults["sentence"]をどっかに
+          //results.sentence
         }                     
     })
     .catch(function (thrown) {
@@ -56,10 +59,8 @@ function OnClickGenerate(){
 
 
 export default function Home(props){
-  const location = useLocation();
   params = useParams(); 
   console.log(params)
-
     return(
         <div>
         <Box sx = {{height:100}}></Box>
@@ -77,11 +78,12 @@ export default function Home(props){
 }
 
 function Salome(){
+  var [sentence, setSentence] = useState("");
     return(
         <div align = "center">
             <img src= {lome} alt="picture" width = "700"/>
             <Box sx = {{height:50}}></Box>
-            <Button variant="contained" color="secondary" size = "large" onClick={OnClickGenerate}>生成</Button>
+            <Button variant="contained" color="secondary" size = "large" onClick={OnClickGenerate(setSentence)}>生成</Button>
             <Box sx = {{height:50}}></Box>
         </div>
     );

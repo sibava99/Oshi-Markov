@@ -24,12 +24,6 @@ def img_add_msg(img, message):
 def embed_sentence_to_image(image_path, sentence):
     img = cv2.imread(image_path, 1)                         # カラー画像読み込み
     img = img_add_msg(img, sentence)                         # 画像に文字を入れる関数を実行
-
-    # 画像を表示させる（何かキーを入力すると終了）
-    #cv2.imshow('title', img)
-    #cv2.waitKey(0)
-    #cv2.destroyAllWindows()
-
     cv2.imwrite('pic\output.jpg', img)
     
 if __name__ == "__main__":

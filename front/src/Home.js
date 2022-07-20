@@ -14,6 +14,7 @@ import { Grid } from '@material-ui/core';
 import Container from '@mui/material/Container';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import axios from 'axios'
+import style from './Home.css'
 
 import {
   useParams,
@@ -85,7 +86,7 @@ function Salome(props){
         <Box sx = {{height:50}}></Box>
         <Button variant="contained" color="secondary" size = "large" onClick={props.onClick}>生成</Button>
         <Box sx = {{height:50}}></Box>
-        {props.sentence}
+        <p className='generated'>{props.sentence}</p>
       </div>
     );
 }

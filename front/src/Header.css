@@ -1,0 +1,13 @@
+.fixHeader{
+    position: fixed;
+    width:100%;
+    z-index: 10;
+    opacity: 0.7;
+}
+
+.fixHeader:hover{
+    position: fixed;
+    width:100%;
+    z-index: 10;
+    opacity: 1;
+}

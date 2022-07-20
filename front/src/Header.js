@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Box from '@mui/material/Box';
 import logo from "./pic/logo.png"
 import { Link } from 'react-router-dom';
+import style from './Header.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div className="fixHeader">
       <AppBar position="static" color="secondary">
         <Toolbar>
         <Box sx = {{width:30}}></Box>

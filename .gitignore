@@ -131,4 +131,11 @@ dmypy.json
 # data
 
 # .envファイルをgitの管理対象から外す
-.env
+.
+
+# 以下2022/11/07追加
+# npm installで競合を起こしたファイル
+# package-lock.jsonは同期するか怪しめ
+front/node_modules
+package-lock.json
+front/package-lock.json
